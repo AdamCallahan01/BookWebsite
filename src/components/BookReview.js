@@ -1,8 +1,15 @@
 import React, { useState } from "react";
-import {books} from "../books";
+import { books } from "../books";
 
 const BookReview = () => {
-  const [showDescription, setShowDescription] = useState(false);
+  const [showDescription, setShowDescription] = useState({});
+
+  const handleDescriptionToggle = (index) => {
+    setShowDescription({
+      ...showDescription,
+      [index]: !showDescription[index],
+    });
+  };
 
   return (
     <div className="reviewsContainer">
@@ -16,15 +23,15 @@ const BookReview = () => {
           <p>{book.review}</p>
           <div className="descriptionContainer">
             <p>
-              Description:{" "}
+              Summary (w/ spoilers):{" "}
               <span
                 className="descriptionToggler"
-                onClick={() => setShowDescription(!showDescription)}
+                onClick={() => handleDescriptionToggle(index)}
               >
                 &#9660;
               </span>
             </p>
-            {showDescription && <p>{book.description}</p>}
+            {showDescription[index] && <p>{book.summary}</p>}
           </div>
         </div>
       ))}
