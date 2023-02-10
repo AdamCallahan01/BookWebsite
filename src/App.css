@@ -1,54 +1,31 @@
-/* App.css */
-
 .App {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f2f2f2;
+  margin: 50px;
 }
 
-nav {
-  width: 100%;
+.navbar {
   display: flex;
-  justify-content: space-around;
-  padding: 1rem 0;
-  background-color: #333;
-  color: #fff;
+  justify-content: center;
+  background-color: #3f51b5;
+  color: white;
+  padding: 10px 0;
+  width: 100%;
 }
 
-nav ul {
+.navList {
   display: flex;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-nav a {
-  font-size: 1.2rem;
+.navItem {
+  margin: 0 10px;
+}
+
+.navLink {
+  color: white;
   text-decoration: none;
-  color: #fff;
-  padding: 0 1rem;
-}
-
-.Home, .About, .Books, .Book {
-  margin-top: 2rem;
-  width: 80%;
-  text-align: center;
-}
-
-.Book {
-  border: 1px solid #333;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #fff;
-}
-
-.Book img {
-  width: 100px;
-  height: 150px;
-  margin-bottom: 1rem;
-}
-
-h1, h2 {
-  color: #333;
 }
