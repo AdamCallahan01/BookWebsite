@@ -1,17 +1,33 @@
-// BookReview.js
+import React, { useState } from "react";
+import {books} from "../books";
 
-import React from "react";
+const BookReview = () => {
+  const [showDescription, setShowDescription] = useState(false);
 
-const BookReview = ({ title, author, rating, dateStarted, dateFinished, review, description }) => {
   return (
-    <div>
-      <h2>{title}</h2>
-      <p>by {author}</p>
-      <p>Rating: {rating}/100</p>
-      <p>Date Started: {dateStarted}</p>
-      <p>Date Finished: {dateFinished}</p>
-      <p>{review}</p>
-      <p>Description: {description}</p>
+    <div className="reviewsContainer">
+      {books.map((book, index) => (
+        <div key={index} className="bookReviewCard">
+          <h3>{book.title}</h3>
+          <p>Author: {book.author}</p>
+          <p>Rating: {book.rating}</p>
+          <p>Date Started: {book.dateStarted}</p>
+          <p>Date Finished: {book.dateFinished}</p>
+          <p>{book.review}</p>
+          <div className="descriptionContainer">
+            <p>
+              Description:{" "}
+              <span
+                className="descriptionToggler"
+                onClick={() => setShowDescription(!showDescription)}
+              >
+                &#9660;
+              </span>
+            </p>
+            {showDescription && <p>{book.description}</p>}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

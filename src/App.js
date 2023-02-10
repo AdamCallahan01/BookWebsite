@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import BookReviewPage from "./pages/BookReviewPage";
+import NavBar from "./components/NavBar";
 import "./App.css";
 
 /*
@@ -17,19 +18,7 @@ const App = () => {
   return (
     <Router>
       <div>
-      <nav className="navbar">
-        <ul className="navList">
-          <li className="navItem">
-            <Link to="/" className="navList">Home</Link>
-          </li>
-          <li className="navItem">
-            <Link to="/about" className="navList">About</Link>
-          </li>
-          <li className="navItem">
-            <Link to="/reviews" className="navList">Reviews</Link>
-          </li>
-        </ul>
-      </nav>
+        <NavBar />
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
