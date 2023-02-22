@@ -1,16 +1,17 @@
 // AboutPage.js
 
 import React from "react";
+import picture1 from "../images/bookshelf2.jpeg";
 
 const AboutPage = () => {
     return (
       <div className="AboutPage">
-        <h1>About Us</h1>
-        <p>We are a team of book lovers who love nothing more than diving into a good book and sharing our thoughts with the world.</p>
-        <p>Whether you're into mystery novels, romance, or science fiction, we've got you covered with reviews of all kinds of books.</p>
+        <h1>About</h1>
+        <p>I read book and write about book</p>
+        <p>placeholder</p>
         <div className="imageContainer">
           {/* Placeholder for an image */}
-          <img src="#" alt="Book Review Team" />
+          <img src={picture1} alt="Book Review Team" />
         </div>
       </div>
     );
