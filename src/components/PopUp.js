@@ -31,7 +31,7 @@ const PopUp = (props)  => {
     <>
       <MDBBtn id='openPopUp' className='openPopUp' onClick={() => setScrollableModal(!scrollableModal)}>More Info</MDBBtn>
 
-      <MDBModal show={scrollableModal} setShow={setScrollableModal} tabIndex='-1'>
+      <MDBModal staticBackdrop show={scrollableModal} setShow={setScrollableModal} tabIndex='-1'>
         <MDBModalDialog scrollable size='lg'>
           <MDBModalContent>
             <MDBModalHeader>
@@ -75,7 +75,7 @@ const PopUp = (props)  => {
                 )}
             </MDBModalBody>
             <MDBModalFooter>
-              <MDBBtn color='secondary' onClick={() => setScrollableModal(!setScrollableModal)}>
+              <MDBBtn className='button-close' color='secondary' onClick={() => setScrollableModal(!setScrollableModal)}>
                 Close
               </MDBBtn>
             </MDBModalFooter>

@@ -22,8 +22,9 @@ const BookList = () => {
 
   //Open popup for book
   const openPopUp = (bookData) => {
-    // document.getElementById(bookData.review_id).getElementsByClassName("openPopUp")[0].click();
-    // console.log(x);
+    // if (modalOpen) {
+      document.getElementById(bookData.review_id).getElementsByClassName("openPopUp")[0].click();
+    // }
   }
 
   useEffect(() => {
@@ -44,17 +45,21 @@ const BookList = () => {
         <p>Loading...</p>
       ) : (
         books.map((book) => (
-          <div onClick={() => openPopUp(book)} className="book-card" key={book.review_id} id={book.review_id}>
-            <img alt="Cover" src={book.cover_url}></img>
-            <h2>{book.book_title}</h2>
-            <h3>{book.series_name}</h3>
-            <p>Author: {book.author_name}</p>
-            <h4>{book.rating}</h4>
-            <p>Date Started: {book.date_started}</p>
-            <p>Date Finished: {book.date_finished}</p>
-            <p>Date Posted: {book.date_posted}</p>
-            <p>{book.review}</p>
-            <PopUp book={book}/>
+          <div>
+            <div onClick={() => openPopUp(book)} className="book-card" key={book.review_id} >
+              <img alt="Cover" src={book.cover_url}></img>
+              <h2>{book.book_title}</h2>
+              <h3>{book.series_name}</h3>
+              <p>Author: {book.author_name}</p>
+              <h4>{book.rating}</h4>
+              <p>Date Started: {book.date_started}</p>
+              <p>Date Finished: {book.date_finished}</p>
+              <p>Date Posted: {book.date_posted}</p>
+              <p>{book.review}</p>
+            </div>
+            <div className="PopUpContainer" id={book.review_id}>
+              <PopUp book={book}/>
+            </div>
           </div>
         ))
       )}

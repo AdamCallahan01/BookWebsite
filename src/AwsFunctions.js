@@ -47,7 +47,7 @@ export const fetchData = async (tableName) => {
     let items;
     items = await docClient.scan(params).promise();
     // console.log("Scan promise: ");
-    // console.log(items);
+    console.log(items);
     items.Items.forEach((item) => itemList.push(item));
     // console.log("Extracted items: ");
     // console.log(itemList);

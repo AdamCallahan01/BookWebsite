@@ -7,6 +7,10 @@
     width: 40px;
     height: 40px;
   }
+
+  .button-close {
+    height: 5%;
+  }
   
   .arrow {
     width: 0;
