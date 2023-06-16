@@ -55,19 +55,32 @@ export const fetchData = async (tableName) => {
 }
 
 //Add data to dynamoDB
-export const putData = (tableName, data) => {
+export const putData = async (tableName, data) => {
     AWS.config.update({region: 'us-west-2'});
 
     var params = {
         TableName: tableName,
         Item: data
     }
-    
-    docClient.put(params, function (err, data) {
-        if (err) {
-            console.log('Error', err)
-        } else {
-            console.log('Success', data)
-        }
-    })
+
+    // docClient.put(params, function (err, data) {
+    //     if (err) {
+    //         console.log('Error', err)
+    //     } else {
+    //         console.log('Success', data)
+    //     }
+    // })
+
+    //return true if succeddful
+    //return false if error occurs
+    let status = false;
+    await docClient.put(params).promise().then(() => {
+        status = true;
+        console.log("SUCCESS");
+      })
+      .catch((error) => {
+        console.log("ERROR");
+      });
+
+    return status;
 }

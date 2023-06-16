@@ -11,6 +11,10 @@
   .button-close {
     height: 5%;
   }
+
+  .openPopUp {
+    display: none;
+  }
   
   .arrow {
     width: 0;

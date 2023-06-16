@@ -1,20 +1,21 @@
 /* bookList.css */
 .book-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 20px;
+    /* grid-template-columns: repeat(auto-fill, minmax(20%, 1fr)); */
+    grid-template-columns: repeat(4, 1fr);
+    grid-row-gap: 20px;
     /* background-color: black; */
 }
 
 .book-card {
     background-color: #f1f1f1; /* Background color */
     border-radius: 15px; /* Rounded edges */
-    padding: 10%; /* Separation from the edge of the div */
-    margin: 10%; /* Separation from the surrounding divs */
+    padding: 5%; /* Separation from the edge of the div */
+    margin: 5%; /* Separation from the surrounding divs */
     max-height: 25%;
     transition: transform 0.2s;
     overflow: hidden;
-    /* max-width: 33%; */
+    max-width: 100%;
 }
 
 .book-card:hover {
@@ -30,18 +31,6 @@
 }
 
 .book-card img {
-    max-height: 100px;
-    max-width: 100px;
+    height: 100%;
+    width: 100%;
 }
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    background-color: rgba(0, 0, 0, 0.25);
-  }
-
-  .modal_content {
-    background-color: white;
-    position: absolute;
-  }

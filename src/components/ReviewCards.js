@@ -15,7 +15,6 @@ const BookList = () => {
 
     setBooks(data);
     setLoading(false);
-    console.log(books);
 
     return data;
   }
@@ -28,7 +27,7 @@ const BookList = () => {
   }
 
   useEffect(() => {
-    const fetchedBooks = fetchDataFromDynamo();
+    fetchDataFromDynamo();
     // console.log("Fetched Books array: ");
     // console.log(fetchedBooks);
     // setTimeout(() => {
@@ -45,13 +44,13 @@ const BookList = () => {
         <p>Loading...</p>
       ) : (
         books.map((book) => (
-          <div>
-            <div onClick={() => openPopUp(book)} className="book-card" key={book.review_id} >
-              <img alt="Cover" src={book.cover_url}></img>
+          <div key={book.review_id}>
+            <div onClick={() => openPopUp(book)} className="book-card">
               <h2>{book.book_title}</h2>
-              <h3>{book.series_name}</h3>
+              <h5>{book.series_name} #{book.series_number}</h5>
               <p>Author: {book.author_name}</p>
-              <h4>{book.rating}</h4>
+              <h4>Score: {book.rating}</h4>
+              <img alt="Cover" src={book.cover_url}></img>
               <p>Date Started: {book.date_started}</p>
               <p>Date Finished: {book.date_finished}</p>
               <p>Date Posted: {book.date_posted}</p>

@@ -31,7 +31,7 @@ const PopUp = (props)  => {
     <>
       <MDBBtn id='openPopUp' className='openPopUp' onClick={() => setScrollableModal(!scrollableModal)}>More Info</MDBBtn>
 
-      <MDBModal staticBackdrop show={scrollableModal} setShow={setScrollableModal} tabIndex='-1'>
+      <MDBModal show={scrollableModal} setShow={setScrollableModal} tabIndex='-1'>
         <MDBModalDialog scrollable size='lg'>
           <MDBModalContent>
             <MDBModalHeader>
@@ -45,7 +45,7 @@ const PopUp = (props)  => {
             <MDBModalBody>
               <h4>
                 Author: {props.book.author_name} <br/>
-                Series: {props.book.series_name} <br/>
+                Series: {props.book.series_name} #{props.book.series_number}<br/>
                 Score: {props.book.rating}
               </h4>
               <p>
@@ -75,9 +75,9 @@ const PopUp = (props)  => {
                 )}
             </MDBModalBody>
             <MDBModalFooter>
-              <MDBBtn className='button-close' color='secondary' onClick={() => setScrollableModal(!setScrollableModal)}>
-                Close
-              </MDBBtn>
+              {/* <MDBBtn className='button-close' color='secondary' onClick={() => setScrollableModal(!setScrollableModal)}>
+                Edit Review
+              </MDBBtn> */}
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>

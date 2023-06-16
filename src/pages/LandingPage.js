@@ -1,5 +1,5 @@
 import React from 'react';
-import {fetchData, updateAwsConfig} from '../AwsFunctions';
+import {fetchData, putData} from '../AwsFunctions';
 
 function LandingPage() {
 
@@ -12,17 +12,20 @@ function LandingPage() {
     
     const addDataToDynamoDB = async () => {
       const userData = {
-        name:"Faisal",
-        age:"170"
+        book_title:"TESTSTESGDH",
+        author_name:"ADNAIUNWIUND",
+        review_id: '198287194374914971'
       }
       
-      // await putData('users' , userData)
+      console.log("AWAITING");
+      let status = await putData('book_reviews' , userData);
+      console.log(status);
     }
     
     return (
       <div>
         <button onClick={() => fetchDataFromDynamo()}>Load Table Data</button>
-        <button onClick={() => updateAwsConfig()}>Load Table Data</button>
+        <button onClick={() => addDataToDynamoDB()}>Load Table Data</button>
       </div>
     );
   }

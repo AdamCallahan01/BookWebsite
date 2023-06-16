@@ -12,6 +12,7 @@ const BookForm = () => {
             book_title: formData.book_title,
             author_name: formData.author_name,
             series_name: formData.series_name,
+            series_number: formData.series_number,
             cover_url: formData.cover_url,
             date_started: formData.date_started,
             date_finished: formData.date_finished,
@@ -23,13 +24,21 @@ const BookForm = () => {
             themes: formData.themes,
             format: formData.format
         }
-        await putData('book_reviews' , userData);
+        let status = await putData('book_reviews' , userData);
+        if (status) { //successfully put data
+          setStatus({ type: 'success' });
+        } else {  //error in DB
+          setStatus({ type: 'error' });
+        }
+        return 0;
     }
 
+  //FOrm Data
   const [formData, setFormData] = useState({
     review_id: '',
     book_title: '',
     author_name: '',
+    series_number: '',
     cover_url: '',
     date_started: '',
     date_finished: '',
@@ -42,6 +51,8 @@ const BookForm = () => {
     themes: [],
     format: '',
   });
+  //Show Success
+  const [status, setStatus] = useState(undefined);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,33 +67,49 @@ const BookForm = () => {
     // Perform any actions with the form data
     console.log(formData);
     //Upload to DynamoDB
-    addDataToDynamoDB(formData);
+    //To make the code wait I added a variable declaration
+    //must be a beter way to do this
+    let x = addDataToDynamoDB(formData);
+    //scroll to top
+    window.scroll(0,0);
 
     // Reset the form
-    setFormData({
-        review_id: '',
-        book_title: '',
-        author_name: '',
-        date_started: '',
-        date_finished: '',
-        date_posted: '',
-        rating: '',
-        review: '',
-        review_spoilers: '',
-        summary: '',
-        series_name: '',
-        themes: [],
-        format: '',
-    });
+    //ONLY if successfully uploaded item
+    if (status?.type === 'success') {
+      setFormData({
+          review_id: '',
+          book_title: '',
+          author_name: '',
+          cover_url: '',
+          date_started: '',
+          date_finished: '',
+          date_posted: '',
+          rating: '',
+          review: '',
+          review_spoilers: '',
+          summary: '',
+          series_name: '',
+          series_number: '',
+          themes: [],
+          format: '',
+      });
+    } else {
+      console.log('TESTING');
+    }
   };
 
   return (
+    
     <form className="book-form" onSubmit={handleSubmit}>
+       {status?.type === 'success' && <p>success SUCCESS SUCCESSS</p>}
+      {status?.type === 'error' && (
+        <p>ERROR ERROR ERROR ERROR</p>
+      )}
       <div className="form-group">
         <label htmlFor="title">Book Title</label>
         <input
           type="text"
-          id="title"
+          id="book_title"
           name="book_title"
           value={formData.book_title}
           onChange={handleChange}
@@ -93,7 +120,7 @@ const BookForm = () => {
         <label htmlFor="author">Author Name</label>
         <input
           type="text"
-          id="author"
+          id="author_name"
           name="author_name"
           value={formData.author_name}
           onChange={handleChange}
@@ -112,6 +139,17 @@ const BookForm = () => {
         />
       </div>
       <div className="form-group">
+        <label htmlFor="series_number">Series Number</label>
+        <input
+          type="number"
+          id="series_number"
+          name="series_number"
+          value={formData.series_number}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
         <label htmlFor="cover_url">Book Cover URL</label>
         <input
           type="text"
@@ -123,30 +161,30 @@ const BookForm = () => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="dateStarted">Date Started</label>
+        <label htmlFor="date_started">Date Started</label>
         <input
           type="date"
-          id="dateStarted"
+          id="date_started"
           name="date_started"
           value={formData.date_started}
           onChange={handleChange}
         />
       </div>
       <div className="form-group">
-        <label htmlFor="dateFinished">Date Finished</label>
+        <label htmlFor="date_finished">Date Finished</label>
         <input
           type="date"
-          id="dateFinished"
+          id="date_finished"
           name="date_finished"
           value={formData.date_finished}
           onChange={handleChange}
         />
       </div>
       <div className="form-group">
-        <label htmlFor="datePosted">Date Posted</label>
+        <label htmlFor="date_posted">Date Posted</label>
         <input
           type="date"
-          id="datePosted"
+          id="date_posted"
           name="date_posted"
           value={formData.date_posted}
           onChange={handleChange}
@@ -172,9 +210,9 @@ const BookForm = () => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="reviewSpoilers">Review with Spoilers</label>
+        <label htmlFor="review_spoilers">Review with Spoilers</label>
         <textarea
-          id="reviewSpoilers"
+          id="review_spoilers"
           name="review_spoilers"
           value={formData.review_spoilers}
           onChange={handleChange}
