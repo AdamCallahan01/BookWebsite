@@ -54,6 +54,11 @@ const BookForm = () => {
   //Show Success
   const [status, setStatus] = useState(undefined);
 
+  const test = () => {
+    setStatus({ type: 'success' });
+    console.log("test");
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -98,13 +103,19 @@ const BookForm = () => {
     }
   };
 
+
+
   return (
-    
-    <form className="book-form" onSubmit={handleSubmit}>
-       {status?.type === 'success' && <p>success SUCCESS SUCCESSS</p>}
+    <>
+    <div className="headerText">
+      <h3>Create A Review</h3> <br/>
+      {status?.type === 'success' && <h3 className="statusMessage">SUCCESS!</h3>}
       {status?.type === 'error' && (
-        <p>ERROR ERROR ERROR ERROR</p>
+        <h3 className="statusMessage">ERROR!</h3>
       )}
+      <button onClick={() => test()}>ajbdiaubdwibadibaw</button>
+    </div>
+    <form className="book-form" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="title">Book Title</label>
         <input
@@ -150,6 +161,16 @@ const BookForm = () => {
         />
       </div>
       <div className="form-group">
+        <label htmlFor="rating">Rating</label>
+        <input
+          type="number"
+          id="rating"
+          name="rating"
+          value={formData.rating}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
         <label htmlFor="cover_url">Book Cover URL</label>
         <input
           type="text"
@@ -191,20 +212,11 @@ const BookForm = () => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="rating">Rating</label>
-        <input
-          type="number"
-          id="rating"
-          name="rating"
-          value={formData.rating}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
         <label htmlFor="review">Review</label>
         <textarea
           id="review"
           name="review"
+          className="review"
           value={formData.review}
           onChange={handleChange}
         />
@@ -214,6 +226,7 @@ const BookForm = () => {
         <textarea
           id="review_spoilers"
           name="review_spoilers"
+          className="review"
           value={formData.review_spoilers}
           onChange={handleChange}
         />
@@ -223,6 +236,7 @@ const BookForm = () => {
         <textarea
           id="summary"
           name="summary"
+          className="review"
           value={formData.summary}
           onChange={handleChange}
         />
@@ -256,8 +270,9 @@ const BookForm = () => {
           <option value="physical">Physical book</option>
         </select>
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" className="submitButton">Submit</button>
     </form>
+    </>
   );
 };
 

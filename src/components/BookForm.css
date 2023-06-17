@@ -1,8 +1,11 @@
 /* bookForm.css */
 
 .book-form {
-    max-width: 500px;
+    max-width: 80%;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    grid-gap: 10px; /* Gap between items */
   }
   
   .form-group {
@@ -49,4 +52,29 @@
     font-size: 14px;
     margin-top: 5px;
   }
-  
+
+  .review {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    font-size: 16px;
+    resize: vertical;
+  }
+
+.submitButton {
+  position: relative;
+  left: 50%;
+  background-color: #ff0000;
+  margin-bottom: 50px;
+}
+
+.headerText {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.statusMessage {
+  display: none;
+}

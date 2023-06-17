@@ -33,7 +33,8 @@ export const fetchData = async (tableName) => {
         });
     var params = {
         TableName: tableName,
-        ReturnConsumedCapacity: 'TOTAL'
+        ReturnConsumedCapacity: 'TOTAL',
+        Limit: 3
     }
 
     // docClient.scan(params, function (err, data) {
@@ -43,15 +44,28 @@ export const fetchData = async (tableName) => {
     //         console.log(err)
     //     }
     // })
-    const itemList = [];
     let items;
     items = await docClient.scan(params).promise();
     // console.log("Scan promise: ");
-    console.log(items);
-    items.Items.forEach((item) => itemList.push(item));
+    // console.log(items);
+    // items.Items.forEach((item) => itemList.push(item));
     // console.log("Extracted items: ");
     // console.log(itemList);
-    return itemList;
+    return items;
+}
+
+//Fetch the items from Dynamo after a certain item key
+export const fetchData2 = async (tableName, lastKey) => {
+    var params = {
+        TableName: tableName,
+        ReturnConsumedCapacity: 'TOTAL',
+        Limit: 3
+    }
+
+    params.ExclusiveStartKey = lastKey;
+    let items;
+    items = await docClient.scan(params).promise();
+    return items;
 }
 
 //Add data to dynamoDB
