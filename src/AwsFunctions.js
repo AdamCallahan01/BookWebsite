@@ -34,7 +34,7 @@ export const fetchData = async (tableName) => {
     var params = {
         TableName: tableName,
         ReturnConsumedCapacity: 'TOTAL',
-        Limit: 3
+        Limit: 10
     }
 
     // docClient.scan(params, function (err, data) {
@@ -59,7 +59,7 @@ export const fetchData2 = async (tableName, lastKey) => {
     var params = {
         TableName: tableName,
         ReturnConsumedCapacity: 'TOTAL',
-        Limit: 3
+        Limit: 10
     }
 
     params.ExclusiveStartKey = lastKey;

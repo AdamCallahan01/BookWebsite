@@ -81,6 +81,8 @@ const BookForm = () => {
     // Reset the form
     //ONLY if successfully uploaded item
     if (status?.type === 'success') {
+      document.getElementsByClassName('statusMessageSuccess')[0].style.display = 'block';
+      document.getElementsByClassName('statusMessageError')[0].style.display = 'none';
       setFormData({
           review_id: '',
           book_title: '',
@@ -99,23 +101,24 @@ const BookForm = () => {
           format: '',
       });
     } else {
+      document.getElementsByClassName('statusMessageError')[0].style.display = 'block';
+      document.getElementsByClassName('statusMessageSuccess')[0].style.display = 'none';
       console.log('TESTING');
     }
   };
-
-
 
   return (
     <>
     <div className="headerText">
       <h3>Create A Review</h3> <br/>
-      {status?.type === 'success' && <h3 className="statusMessage">SUCCESS!</h3>}
-      {status?.type === 'error' && (
-        <h3 className="statusMessage">ERROR!</h3>
-      )}
-      <button onClick={() => test()}>ajbdiaubdwibadibaw</button>
+      <h3 className="statusMessageSuccess">SUCCESS!</h3>
+      <h3 className="statusMessageError">ERROR!</h3>
     </div>
     <form className="book-form" onSubmit={handleSubmit}>
+    {status?.type === 'success' && <h3 className="statusMessageSuccess">SUCCESS!</h3>}
+      {status?.type === 'error' && (
+        <h3 className="statusMessageError">ERROR!</h3>
+      )}
       <div className="form-group">
         <label htmlFor="title">Book Title</label>
         <input
