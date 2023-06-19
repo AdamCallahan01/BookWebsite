@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ReviewCards.css';
-import {fetchData, fetchData2} from '../AwsFunctions';
+import {fetchData, fetchData2, scanAllData} from '../AwsFunctions';
 import PopUp from '../components/PopUp';
 
 // BookList component
@@ -42,8 +42,44 @@ const BookList = () => {
     // }
   }
 
+  //helper function for sorting the results
+  function sortHelper( a, b ) {
+    if ( a.date_finished < b.date_posted ){
+      return 1;
+    }
+    if ( a.date_posted > b.date_posted ){
+      return -1;
+    }
+    return 0;
+  }
+
+  //organize results by date posted
+  const sortResults = () => {
+    let itemList = books;
+    itemList.sort(sortHelper);
+    setBooks(itemList);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }
+
+  //NEW CODE
+  //Since querying is dumb we refactor
+  const getDynamoData = async () => {
+    let data = await scanAllData();
+    data.sort(sortHelper);
+    setBooks(data);
+    setLoading(false);
+  }
+
   useEffect(() => {
-    fetchDataFromDynamo();
+    //OLD
+    //fetchDataFromDynamo();
+
+    //NEW
+    getDynamoData();
+
     // console.log("Fetched Books array: ");
     // console.log(fetchedBooks);
     // setTimeout(() => {
@@ -55,7 +91,7 @@ const BookList = () => {
 
   return (
     <div>
-      <button onClick={() => fetchMore()}>LOAD MORE...</button>
+      <button onClick={() => sortResults()}>Sort</button>
     <div className="book-list">
       {loading ? (
         <p>Loading...</p>
@@ -80,6 +116,7 @@ const BookList = () => {
         ))
       )}
       </div>
+      <button onClick={() => fetchMore()}>LOAD MORE...</button>
     </div>
   );
 };

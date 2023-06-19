@@ -27,6 +27,7 @@ const BookForm = () => {
         let status = await putData('book_reviews' , userData);
         if (status) { //successfully put data
           setStatus({ type: 'success' });
+          console.log(status.type);
         } else {  //error in DB
           setStatus({ type: 'error' });
         }
@@ -55,8 +56,8 @@ const BookForm = () => {
   const [status, setStatus] = useState(undefined);
 
   const test = () => {
-    setStatus({ type: 'success' });
-    console.log("test");
+    // setStatus({ type: 'success' });
+    console.log(status.type);
   }
 
   const handleChange = (e) => {
@@ -67,14 +68,20 @@ const BookForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Perform any actions with the form data
     console.log(formData);
     //Upload to DynamoDB
     //To make the code wait I added a variable declaration
     //must be a beter way to do this
-    let x = addDataToDynamoDB(formData);
+    await addDataToDynamoDB(formData);
+    console.log(status?.type);
+    if (status?.type) {
+      console.log("Type")
+    } else {
+      setTimeout(test, 1000);
+    }
     //scroll to top
     window.scroll(0,0);
 
@@ -103,12 +110,12 @@ const BookForm = () => {
     } else {
       document.getElementsByClassName('statusMessageError')[0].style.display = 'block';
       document.getElementsByClassName('statusMessageSuccess')[0].style.display = 'none';
-      console.log('TESTING');
     }
   };
 
   return (
     <>
+    <button onClick={() => test()}>Test</button>
     <div className="headerText">
       <h3>Create A Review</h3> <br/>
       <h3 className="statusMessageSuccess">SUCCESS!</h3>
